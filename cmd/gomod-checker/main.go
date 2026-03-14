@@ -31,7 +31,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("Проверяю наличие обновлений...")
+	fmt.Println("Проверяю наличие обновлений...")
 	updates, err := updater.GetUpdates(repoDir)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Ошибка получения обновлений: %v\n", err)
