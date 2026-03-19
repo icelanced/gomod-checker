@@ -33,8 +33,13 @@ func Parse(dir string) (*ModInfo, error) {
 		goVer = f.Go.Version
 	}
 
+	moduleName := "не указан"
+	if f.Module != nil {
+		moduleName = f.Module.Mod.Path
+	}
+
 	return &ModInfo{
-		ModuleName: f.Module.Mod.Path,
+		ModuleName: moduleName,
 		GoVersion:  goVer,
 	}, nil
 }
