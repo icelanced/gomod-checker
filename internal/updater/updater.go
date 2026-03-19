@@ -22,11 +22,13 @@ type Module struct {
 func GetUpdates(dir string) ([]Module, error) {
 
 	cmd := exec.Command("go", "list", "-m", "-u", "-json", "all")
-
 	cmd.Dir = dir
 
 	out, err := cmd.Output()
 	if err != nil {
+		if exitErr, ok := err.(*exec.ExitError); ok {
+			return nil, fmt.Errorf("`go list` завершился с ошибкой: %s", exitErr.Stderr)
+		}
 		return nil, fmt.Errorf("`go list` завершился с ошибкой: %w", err)
 	}
 
